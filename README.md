@@ -1,7 +1,7 @@
 # Wrap_Boundary_Calculation
 Calculation of wrap boundary and subsequent address's using SystemVeriog
 
-Associative Array is used to the values in the address
+Associative Array is used store to the values in the calculted address space
 
 The rules for WRAP BOUNDARY calculation are take from ARM 
 
