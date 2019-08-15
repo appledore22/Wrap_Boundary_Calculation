@@ -1,14 +1,14 @@
 module wrap_boundary;
     
     initial begin
-        int start_addr = 32'h44;
+        int start_addr = 32'h38;
         byte byte_size = 8'd4;
         byte no_of_transfers = 8'd4;
 
         // Define memory as associative array to store data into different memory location
         int memory[real];
         real index;
-        int wrap_boundary;
+        int wrap_boundary,temp_addr;
         int total_bytes;
         bit aligned;        
 
@@ -26,6 +26,10 @@ module wrap_boundary;
             // 56/16 = 3.5 = 3
             // If we convert the integer into real and then use $ceil the result obtained will be 56/16 = 3.5 = $ceil(3.5) = 4                    
             wrap_boundary = ($ceil(real'(start_addr)/total_bytes))*(total_bytes);
+
+            //Calculation of new addr after wrapping boundary is reached
+            temp_addr = int'(((start_addr)/total_bytes)*(total_bytes));
+
             
             $display("\n\tWRAP BONDARY\t: 0x%0h",wrap_boundary);
 
@@ -34,7 +38,7 @@ module wrap_boundary;
 
                 if(start_addr == wrap_boundary)
                 begin
-                    start_addr = start_addr - total_bytes;  
+                    start_addr = temp_addr;  
                 end
 
                 memory[start_addr] = i;               
